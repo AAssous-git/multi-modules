@@ -69,6 +69,7 @@ tools {
         }
             
         stage('Déploiement intégration') {
+         agent any
              input {
   message 'Data center name'
   ok 'Deploy'
