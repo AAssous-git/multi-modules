@@ -43,7 +43,7 @@ tools {
                 stage('Vulnérabilités') {
                     steps {
                         echo 'Tests de Vulnérabilités OWASP'
-                       mvn -DskipTests verify   
+                       sh 'mvn -DskipTests verify'   
                     }
                     
                 }
@@ -53,7 +53,7 @@ tools {
                              // some block
                              sh 'echo $credentialsId'
                         }
-                        mvn -Dsonar.token=${SONAR_TOKEN} clean integration-test sonar:sonar
+                        sh 'mvn -Dsonar.token=${SONAR_TOKEN} clean integration-test sonar:sonar'
                         
                      }
                     
