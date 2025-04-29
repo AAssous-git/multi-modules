@@ -82,16 +82,18 @@ pipeline {
             input {
                 message 'Vers quel datacenter voulez-vous déployer ?'
                 ok 'Déployer'
-                parameters {
-                    choice choices: ['Paris', 'Lille', 'Lyon'], name: 'DATACENTER'
-                }
+                
             }
 
             steps {
                 echo "Déploiement intégration $DATACENTER"
                 unstash 'application'
                 sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar'
-                
+                script {
+                   def props = readJSON file: 'deployment.jason', text: ''
+	           def datacenters=prop ['datacenters']	
+                   
+                }
             }
         }
 
