@@ -54,8 +54,9 @@ tools {
                         withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_TOKEN')]) {
                              // some block
                              sh 'echo $credentialsId'
-                        }
+                        
                         sh 'mvn -Dsonar.token=${SONAR_TOKEN} clean integration-test sonar:sonar'
+                        } 
                         
                      }
                     
