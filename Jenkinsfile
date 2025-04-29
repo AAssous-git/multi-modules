@@ -41,6 +41,7 @@ tools {
         stage('Analyse qualité et vulnérabilités') {
             parallel {
                 stage('Vulnérabilités') {
+                    agent any
                     steps {
                         echo 'Tests de Vulnérabilités OWASP'
                        sh 'mvn -DskipTests verify'   
@@ -48,6 +49,7 @@ tools {
                     
                 }
                  stage('Analyse Sonar') {
+                    agent any
                      steps {
                         withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_TOKEN')]) {
                              // some block
