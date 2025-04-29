@@ -69,12 +69,12 @@ pipeline {
         }
   */          
         stage('Déploiement intégration') {
-            when {
+            /*when {
                 branch 'main'
                 beforeOptions true
                 beforeInput true
                 beforeAgent true
-            }
+            }*/
             options {
                 timeout(2)
             }
