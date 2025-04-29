@@ -69,6 +69,7 @@ pipeline {
         }
   */          
         stage('Déploiement intégration') {
+
             /*when {
                 branch 'main'
                 beforeOptions true
