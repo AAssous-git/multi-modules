@@ -6,6 +6,8 @@ tools {
 }
 
 
+
+
     stages {
         stage('Compile et tests') {
             steps {
@@ -17,6 +19,7 @@ tools {
     // One or more steps need to be included within each condition's block.
         sh 'echo always executed'
          junit '**/target/surefire-reports/*.xml'
+         
          
 
   }
@@ -40,13 +43,18 @@ tools {
                 stage('Vulnérabilités') {
                     steps {
                         echo 'Tests de Vulnérabilités OWASP'
-                        sh ''
+                       mvn -DskipTests verify   
                     }
                     
                 }
                  stage('Analyse Sonar') {
                      steps {
-                        echo 'Analyse sonar'
+                        withCredentials([string(credentialsId: 'sonartoken', variable: 'SONAR_TOKEN')]) {
+                             // some block
+                             sh 'echo $credentialsId'
+                        }
+                        mvn -Dsonar.token=${SONAR_TOKEN} clean integration-test sonar:sonar
+                        
                      }
                     
                 }
