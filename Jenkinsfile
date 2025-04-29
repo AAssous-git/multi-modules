@@ -15,6 +15,7 @@ tools {
             post {
   always {
     // One or more steps need to be included within each condition's block.
+        sh 'echo always executed'
          junit '**/target/surefire-reports/*.xml'
          
 
