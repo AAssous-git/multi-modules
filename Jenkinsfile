@@ -26,8 +26,11 @@ tools {
   success {
     // One or more steps need to be included within each condition's block.
     archiveArtifacts 'application/**/*.jar'
-
-  }
+    
+                dir ('application/target') {
+                 stash name:'application',include:*.jar' 
+      
+    }
   failure {
     // One or more steps need to be included within each condition's block.
     sh 'echo sending mail failure'
@@ -66,22 +69,22 @@ tools {
         }
             
         stage('Déploiement intégration') {
-
-            steps {
-                echo "Déploiement intégration"
-
-                input {
+             input {
   message 'Data center name'
   ok 'Deploy'
   submitter 'Paris,Londres,Madrid'
   parameters {
     choice choices: ['Paris', 'Londres', 'Madrid'], description: 'Choix data center', name: 'data_center'
   }
-}
+
+            steps {
+                echo "Déploiement intégration $data_center "
+                              
+              }
 
                 
             }
-        }
+       }
 
      }
     
