@@ -5,7 +5,7 @@ pipeline {
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
     }
     tools {
-        maven 'MAVEN3'
+        maven 'Maven 3'
     }
 
 
