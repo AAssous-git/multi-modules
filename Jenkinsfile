@@ -91,7 +91,7 @@ pipeline {
                 unstash 'application'
                 /*sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar' */
                 script {
-                   def props = readJSON file: 'deployment.jason', text: ''
+                   def prop = readJSON file: 'deployment.jason', text: ''
 	               def datacenters=prop ['dataCenters']	
                    for (datacenter in datacenters)   {
                      sh "mkdir datacenter/$datacenter"
