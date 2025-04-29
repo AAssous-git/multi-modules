@@ -88,10 +88,16 @@ pipeline {
             steps {
                 echo "Déploiement intégration $DATACENTER"
                 unstash 'application'
-                sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar'
+                /*sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar' */
                 script {
                    def props = readJSON file: 'deployment.jason', text: ''
-	           def datacenters=prop ['datacenters']	
+	               def datacenters=prop ['dataCenters']	
+                   for (datacenter in datacenters)   {
+                     sh "mkdir datacenter/$datacenter"
+                     def exitStatus=sh returnStatus:true,script :"cp *jar datacenter/$datacenter"
+                     
+                    }
+
                    
                 }
             }
