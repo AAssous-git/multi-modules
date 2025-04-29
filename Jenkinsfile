@@ -28,7 +28,7 @@ tools {
     archiveArtifacts 'application/**/*.jar'
     
                 dir ('application/target') {
-                 stash name:'application',include:*.jar' 
+                 stash name:'application',include:'*.jar' 
       
     }
   failure {
