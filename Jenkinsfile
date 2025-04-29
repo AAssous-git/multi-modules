@@ -94,9 +94,9 @@ pipeline {
                    def prop = readJSON file: 'deployment.jason', text: ''
 	               def datacenters=prop ['dataCenters']	
                    for (datacenter in datacenters)   {
-                     sh "mkdir datacenter/$datacenter"
-                     def exitStatus=sh returnStatus:true,script :"cp *jar datacenter/$datacenter"
-                     sh "echo copy to datacenter/$datacenter with return code $exitStatus"
+                     sh "mkdir $datacenter"
+                     def exitStatus=sh returnStatus:true,script :"cp *jar $datacenter"
+                     sh "echo copy to $datacenter with return code $exitStatus"
                     }
 
                    
