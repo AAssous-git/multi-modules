@@ -87,7 +87,7 @@ pipeline {
             }
 
             steps {
-                echo "Déploiement intégration $DATACENTER"
+                echo "Déploiement intégration "
                 unstash 'application'
                 /*sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar' */
                 script {
