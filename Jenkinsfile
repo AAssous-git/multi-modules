@@ -69,6 +69,16 @@ tools {
 
             steps {
                 echo "Déploiement intégration"
+
+                input {
+  message 'Data center name'
+  ok 'Deploy'
+  submitter 'Paris,Londres,Madrid'
+  parameters {
+    choice choices: ['Paris', 'Londres', 'Madrid'], description: 'Choix data center', name: 'data_center'
+  }
+}
+
                 
             }
         }
