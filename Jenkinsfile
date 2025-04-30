@@ -44,7 +44,7 @@ pipeline {
              
         }
          stage('Analyse qualité et vulnérabilités') {
-            agnet any
+            agent any
             steps  {
                 unstash 'application'
                 script {
