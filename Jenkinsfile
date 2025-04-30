@@ -31,44 +31,12 @@ pipeline {
                 }
                 unsuccessful {
                     // One or more steps need to be included within each condition's block.
-                    mail bcc: '', body: 'Pipeline en erreur', cc: '', from: 'jenkins@plbformation.com', replyTo: '', subject: 'Error !', to: 'david.thibau@gmail.com'
+                    mail bcc: '', body: 'Pipeline en erreur', cc: '', from: 'jenkins@plbformation.com', replyTo: '', subject: 'Error !', to: 'ahmed.assous@free.fr'
                 }
             }
              
         }
-/*        stage('Analyse qualité et vulnérabilités') {
-            parallel {
-                stage('Vulnérabilités') {
-                    agent any 
-                    steps {
-                        echo 'Tests de Vulnérabilités OWASP'
-                        withCredentials([string(credentialsId: 'NVD_API_KEY', variable: 'NVD_API_KEY')]) {
-                            sh 'mvn verify -Dnvd.api.key=$NVD_API_KEY -DskipTests'
-                        }
-                    }
-                    post {
-                        success {
-                            // One or more steps need to be included within each condition's block.
-                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'application/target', reportFiles: 'dependency-check-report.html', reportName: 'Analyse de dépendances OWASP', reportTitles: '', useWrapperFileDirectly: true])                        
-                        }
-                    }
-                    
-                }
-                 stage('Analyse Sonar') {
-                    agent any 
-                    environment {
-                        SONAR_TOKEN = credentials('SONAR_TOKEN')
-                    }
-                     steps {
-                        echo 'Analyse sonar'
-                        sh 'mvn -Dsonar.token=${SONAR_TOKEN} clean integration-test sonar:sonar'
-                     }
-                    
-                }
-            }
-            
-        }
-  */          
+
         
     }    
 }
