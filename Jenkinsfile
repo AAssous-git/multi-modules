@@ -49,8 +49,8 @@ pipeline {
                 unstash 'application'
                 script {
                     def dockerImage=docker.build('aassous/multi-modules','.')
-                    docker.withRegistry('https://registry.hub.docker.com','DOCKERHUB')
-                    dockerImage.push "${env.$BRANCH_NAME}"
+                    docker.withRegistry('https://registry.hub.docker.com','DOCKERHUB'){
+                    dockerImage.push "${env.$BRANCH_NAME}"}
                 }
                 }
             }
