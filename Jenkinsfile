@@ -83,6 +83,9 @@ pipeline {
             input {
                 message 'Vers quel datacenter voulez-vous déployer ?'
                 ok 'Déployer'
+                parameters {
+            choice choices: ['Paris', 'Lille', 'Toulouse'], name: 'City'
+  }
                 
             }
 
@@ -94,9 +97,14 @@ pipeline {
                    def prop = readJSON file: 'deployment.jason', text: ''
 	               def datacenters=prop ['dataCenters']	
                    for (datacenter in datacenters)   {
-                     sh "mkdir $datacenter"
+                    if (fileExists("$datacenter")) {
+                      echo "Folder $datacenter"
+                    }
+                    else
+                    {sh "mkdir $datacenter"
                      def exitStatus=sh returnStatus:true,script :"cp *jar $datacenter"
-                     sh "echo copy to $datacenter with return code $exitStatus"
+                     sh "echo copy to $datacenter with return code $exitStatus"} 
+                     
                     }
 
                    
