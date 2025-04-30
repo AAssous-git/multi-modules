@@ -16,7 +16,7 @@ pipeline {
             steps {
                 echo 'Unit test et packaging'
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-                createTarGz sourceDir:'.',extension:'.xml',outputDir:'/tmp'
+                createTarGz sourceDir:'.',extension:'*.xml',outputDir:'/tmp'
             } 
             post {
                 always {
