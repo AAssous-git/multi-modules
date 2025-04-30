@@ -43,6 +43,18 @@ pipeline {
             }
              
         }
+         stage('Analyse qualité et vulnérabilités') {
+            agnet any
+            steps  {
+                unstash 'application'
+                script {
+                    def dockerImage=docker.build('aassous/multi-modules','.')
+                    docker.WithRegistry('https://registry.hub.docker.com','DOCKERHUB')
+                    dockerImage.push "env.BARANCH_NAME)"$
+
+                }
+                }
+            }
 /*        stage('Analyse qualité et vulnérabilités') {
             parallel {
                 stage('Vulnérabilités') {
