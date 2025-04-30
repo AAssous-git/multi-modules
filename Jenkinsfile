@@ -1,8 +1,6 @@
 pipeline {
   
-
-
-    stages {
+   stages {
         stage('Compile et tests') {
             agent  {
                kubernetes {
@@ -11,8 +9,7 @@ pipeline {
             }
             steps {
                 container(name:'openjdk-17') {
-               
-               
+                             
                 echo 'Unit test et packaging'
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package'
             } 
