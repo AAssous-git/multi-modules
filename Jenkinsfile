@@ -2,19 +2,20 @@ pipeline {
   
    stages {
         stage('Compile et tests') {
-            agent  {
-               KubLocal {
-                 // inheritFrom 'jdk17-agent'
-                 inheritFrom 'default'
-               }
-            }
-            steps {
-                container(name:'openjdk-17') {
-                             
-                echo 'Unit test et packaging'
-                sh 'mvn -Dmaven.test.failure.ignore=true clean package'
-            } 
-         }
+
+agent {
+kubernetes {
+inheritFrom 'jdk17-agent'
+}
+}
+steps {
+container(name: 'openjdk-17') {
+sh 'javac -version'
+}
+}
+
+          
+            
             post {
                 always {
                     // One or more steps need to be included within each condition's block.
