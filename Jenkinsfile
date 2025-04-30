@@ -1,7 +1,8 @@
 pipeline {
   
-   stages {
-        stage('Compile et tests') {
+   /*
+  stages {
+        stage('Compile et tests') {*/
 
 agent {
 kubernetes {
@@ -34,8 +35,8 @@ sh 'javac -version'
                 }
             }
              
-        }
+       /* }
 
         
-    }    
+    }    */
 }
