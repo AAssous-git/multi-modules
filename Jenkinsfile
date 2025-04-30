@@ -4,7 +4,8 @@ pipeline {
         stage('Compile et tests') {
             agent  {
                kubernetes {
-                  inheritFrom 'jdk17-agent'
+                 // inheritFrom 'jdk17-agent'
+                 inheritFrom 'default'
                }
             }
             steps {
