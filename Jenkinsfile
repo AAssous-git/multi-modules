@@ -50,7 +50,7 @@ pipeline {
                 script {
                     def dockerImage=docker.build('aassous/multi-modules','.')
                     docker.withRegistry('https://registry.hub.docker.com','DOCKERHUB')
-                    dockerImage.push "env.BARANCH_NAME)"
+                    dockerImage.push "env.$BRANCH_NAME)"
                 }
                 }
             }
