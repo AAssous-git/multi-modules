@@ -1,21 +1,22 @@
 pipeline {
-   agent none 
-   options {
-        timeout(time: 1, unit: 'HOURS')
-        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '10')
-    }
-    tools {
-        maven 'Maven 3'
-    }
+  
 
 
     stages {
         stage('Compile et tests') {
-            agent any
+            agent  {
+               kubernetes {
+                  inheritFrom 'jdk17-agent'
+               }
+            }
             steps {
+                container(name:'openjdk-17') {
+               
+               
                 echo 'Unit test et packaging'
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package'
             } 
+         }
             post {
                 always {
                     // One or more steps need to be included within each condition's block.
@@ -68,33 +69,6 @@ pipeline {
             
         }
   */          
-        stage('Déploiement intégration') {
-            when {
-                branch 'main'
-                beforeOptions true
-                beforeInput true
-                beforeAgent true
-            }
-            options {
-                timeout(2)
-            }
-            agent any
-            input {
-                message 'Vers quel datacenter voulez-vous déployer ?'
-                ok 'Déployer'
-                parameters {
-                    choice choices: ['Paris', 'Lille', 'Lyon'], name: 'DATACENTER'
-                }
-            }
-
-            steps {
-                echo "Déploiement intégration $DATACENTER"
-                unstash 'application'
-                sh 'cp *.jar /home/plb/MyWork/multi-module/serveurs/${DATACENTER}.jar'
-                
-            }
-        }
-
-     }
+        
     
 }
