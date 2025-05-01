@@ -1,14 +1,12 @@
 pipeline {
-  
-
-
-    stages {
-        stage('Compile et tests') {
-            agent  {
+    agent  {
                kubernetes {
                   inheritFrom 'jdk17-agent'
                }
             }
+    stages {
+        stage('Compile et tests') {
+          
             steps {
                 container(name:'openjdk-17') {
                
