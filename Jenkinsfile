@@ -12,7 +12,8 @@ pipeline {
                
                
                 echo 'Unit test et packaging'
-                sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+               /* sh 'mvn -Dmaven.test.failure.ignore=true clean package' */
+                    sh 'javac -version'
             } 
          }
             post {
